@@ -12,11 +12,13 @@
 void AStandardHUD::BrginPlay()
 {
 	MyUIWidget = SNew(SStandardSlateWidget).OwnerHUDArg(this);
-
-	GEngine->GameViewport->AddViewportWidgetContent(
-		SNew(SWeakWidget)
-		.PossiblyNullContent(MyUIWidget.ToSharedRef())
-	);
+	if (GEngine)
+	{
+		GEngine->GameViewport->AddViewportWidgetContent(
+			SNew(SWeakWidget)
+			.PossiblyNullContent(MyUIWidget.ToSharedRef())
+		);
+	}
 
 	MyUIWidget->SetVisibility(EVisibility::Visible);
 }
